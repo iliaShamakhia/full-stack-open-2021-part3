@@ -50,6 +50,19 @@ app.get('/api/persons/:id',(request,response)=>{
   }
 });
 
+app.put('/api/persons/:id',(request,response)=>{
+  let id = Number(request.params.id);
+  let body=request.body;
+  let person =phonebook.find(el=>el.id===id);
+  let temp={
+    name:person.name,
+    number:body.number,
+    id:person.id
+  }
+  phonebook=phonebook.concat(temp);
+  response.json(temp);
+});
+
 app.post('/api/persons',(request,response)=>{
 
   const body = request.body;
